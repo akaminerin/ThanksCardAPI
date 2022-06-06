@@ -20,7 +20,7 @@ namespace ThanksCardAPI.Models
         //テンプレートテーブル
         public DbSet<Template> Template { get; set; }
         //制限テーブル
-        public DbSet<Security> Securities { get; set; }
+        public DbSet<Security> Security { get; set; }
 
 
     }
