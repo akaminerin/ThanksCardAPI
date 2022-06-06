@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(option =>
                 option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddDbContext<ApplicationContext>(opt =>
-     opt.UseNpgsql("Host=localhost; Database=webapp1; Username=postgres; Password=admin"));
+     opt.UseNpgsql("Host=localhost; Database=webapp1; Username=postgres; Password=postgres"));
 // DateTime 型 を UTC で データを PostgreSQL に登録
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddControllers();

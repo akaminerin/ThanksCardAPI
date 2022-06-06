@@ -17,7 +17,7 @@ namespace ThanksCardAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -54,9 +54,15 @@ namespace ThanksCardAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityName")
+                        .HasColumnType("text");
+
                     b.HasKey("id");
 
-                    b.ToTable("Securities");
+                    b.ToTable("Security");
                 });
 
             modelBuilder.Entity("ThanksCardAPI.Models.Tag", b =>
@@ -77,11 +83,11 @@ namespace ThanksCardAPI.Migrations
 
             modelBuilder.Entity("ThanksCardAPI.Models.Template", b =>
                 {
-                    b.Property<long>("TemplateId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("TemplateId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("TemplateText")
                         .HasColumnType("text");
@@ -89,7 +95,7 @@ namespace ThanksCardAPI.Migrations
                     b.Property<string>("Templatename")
                         .HasColumnType("text");
 
-                    b.HasKey("TemplateId");
+                    b.HasKey("Id");
 
                     b.ToTable("Template");
                 });
