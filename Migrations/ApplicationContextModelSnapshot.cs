@@ -106,10 +106,8 @@ namespace ThanksCardAPI.Migrations
                     b.Property<long>("FromId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("TemplateameTemplateid")
-                        .HasColumnType("bigint");
 
-                    b.Property<string>("ThanksCardtitle")
+                    b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<long>("TitleiD")
