@@ -1,6 +1,7 @@
 ﻿#nullable disable
 namespace ThanksCardAPI.Models
 {
+    //社員テーブル
     public class User
     {
         public long Id { get; set; }

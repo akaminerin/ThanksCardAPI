@@ -9,11 +9,19 @@ namespace ThanksCardAPI.Models
             : base(options)
         {
         }
+        //社員テーブル
         public DbSet<User> Users { get; set; }
+        //所属テーブル
         public DbSet<Department> Departments { get; set; }
+        //Thankscardテーブル
         public DbSet<ThanksCard> ThanksCards { get; set; }
+        //ThankscardテーブルID？TAG？
         public DbSet<Tag> Tag { get; set; }
+        //テンプレートテーブル
         public DbSet<Template> Template { get; set; }
-        public DbSet<Security> securities { get; set; }
+        //制限テーブル
+        public DbSet<Security> Securities { get; set; }
+
+
     }
 }

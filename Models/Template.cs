@@ -1,9 +1,12 @@
-﻿namespace ThanksCardAPI.Models
+﻿#nullable disable
+
+namespace ThanksCardAPI.Models
 {
+    //テンプレートテーブル
     public class Template
     {
-        public long Templateid { get; set; }
-        public string Templateame { get; set; }
-        public string Templatemessage { get; set; }
+        public long TemplateId { get; set; }
+        public string Templatename { get; set; }
+        public string TemplateText { get; set; }
     }
 }
