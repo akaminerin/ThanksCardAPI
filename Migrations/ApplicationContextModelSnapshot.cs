@@ -62,43 +62,16 @@ namespace ThanksCardAPI.Migrations
                     b.ToTable("Tag");
                 });
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Template", b =>
-                {
-                    b.Property<long>("Templateid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Templateid"));
-
-                    b.Property<string>("Templateame")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Templatemessage")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Templateid");
-
-                    b.ToTable("Template");
-                });
-
             modelBuilder.Entity("ThanksCardAPI.Models.ThanksCard", b =>
                 {
-                    b.Property<long>("ThanksCardid")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ThanksCardid"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Body")
                         .HasColumnType("text");
-
-                    b.Property<int>("Countiine")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Countkaizen")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp without time zone");
@@ -106,21 +79,15 @@ namespace ThanksCardAPI.Migrations
                     b.Property<long>("FromId")
                         .HasColumnType("bigint");
 
-
                     b.Property<string>("Title")
                         .HasColumnType("text");
-
-                    b.Property<long>("TitleiD")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("ToId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("ThanksCardid");
+                    b.HasKey("Id");
 
                     b.HasIndex("FromId");
-
-                    b.HasIndex("TemplateameTemplateid");
 
                     b.HasIndex("ToId");
 
@@ -194,10 +161,6 @@ namespace ThanksCardAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ThanksCardAPI.Models.Template", "Templateame")
-                        .WithMany()
-                        .HasForeignKey("TemplateameTemplateid");
-
                     b.HasOne("ThanksCardAPI.Models.User", "To")
                         .WithMany()
                         .HasForeignKey("ToId")
@@ -205,8 +168,6 @@ namespace ThanksCardAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("From");
-
-                    b.Navigation("Templateame");
 
                     b.Navigation("To");
                 });
