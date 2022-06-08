@@ -26,8 +26,8 @@ namespace ThanksCardAPI.Controllers
             // ThanksCard を受け取った回数をカウントしてリストで返す
             return await _context.ThanksCards
                 .GroupBy(t => t.To)
-                .Select(t => new Rank { Name = t.Key.Name,　Countiine = t.Count() })
-                .OrderByDescending(t => t.Countiine)
+                .Select(t => new Rank { Name = t.Key.Name, Count = t.Count() })
+                .OrderByDescending(t => t.Count)
                 .ToListAsync();
         }
     }
