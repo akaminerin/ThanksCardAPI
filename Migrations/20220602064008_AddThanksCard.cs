@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ThanksCardAPI.Migrations
 {
-    public partial class AddUserModel8 : Migration
+    public partial class AddThanksCard : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,18 +31,6 @@ namespace ThanksCardAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Securities",
-                columns: table => new
-                {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Securities", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tag",
                 columns: table => new
                 {
@@ -56,26 +44,11 @@ namespace ThanksCardAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Template",
-                columns: table => new
-                {
-                    TemplateId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Templatename = table.Column<string>(type: "text", nullable: true),
-                    TemplateText = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Template", x => x.TemplateId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Usercd = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
                     IsAdmin = table.Column<bool>(type: "boolean", nullable: false),
@@ -97,24 +70,15 @@ namespace ThanksCardAPI.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Body = table.Column<string>(type: "text", nullable: true),
                     FromId = table.Column<long>(type: "bigint", nullable: false),
                     ToId = table.Column<long>(type: "bigint", nullable: false),
-                    TemplateId = table.Column<long>(type: "bigint", nullable: false),
-                    Body = table.Column<string>(type: "text", nullable: true),
-                    Countiine = table.Column<int>(type: "integer", nullable: false),
-                    Countkaizen = table.Column<int>(type: "integer", nullable: false),
-                    CreatedDateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    kidoku = table.Column<bool>(type: "boolean", nullable: false)
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ThanksCards", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ThanksCards_Template_TemplateId",
-                        column: x => x.TemplateId,
-                        principalTable: "Template",
-                        principalColumn: "TemplateId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ThanksCards_Users_FromId",
                         column: x => x.FromId,
@@ -166,11 +130,6 @@ namespace ThanksCardAPI.Migrations
                 column: "FromId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ThanksCards_TemplateId",
-                table: "ThanksCards",
-                column: "TemplateId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ThanksCards_ToId",
                 table: "ThanksCards",
                 column: "ToId");
@@ -194,9 +153,6 @@ namespace ThanksCardAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Securities");
-
-            migrationBuilder.DropTable(
                 name: "ThanksCardTag");
 
             migrationBuilder.DropTable(
@@ -204,9 +160,6 @@ namespace ThanksCardAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "ThanksCards");
-
-            migrationBuilder.DropTable(
-                name: "Template");
 
             migrationBuilder.DropTable(
                 name: "Users");

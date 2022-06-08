@@ -46,19 +46,6 @@ namespace ThanksCardAPI.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Security", b =>
-                {
-                    b.Property<long>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
-
-                    b.HasKey("id");
-
-                    b.ToTable("Securities");
-                });
-
             modelBuilder.Entity("ThanksCardAPI.Models.Tag", b =>
                 {
                     b.Property<long>("Id")
@@ -77,30 +64,32 @@ namespace ThanksCardAPI.Migrations
 
             modelBuilder.Entity("ThanksCardAPI.Models.Template", b =>
                 {
-                    b.Property<long>("TemplateId")
+                    b.Property<long>("Templateid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("TemplateId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Templateid"));
 
-                    b.Property<string>("TemplateText")
+                    b.Property<string>("Templateame")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Templatename")
+                    b.Property<string>("Templatemessage")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("TemplateId");
+                    b.HasKey("Templateid");
 
                     b.ToTable("Template");
                 });
 
             modelBuilder.Entity("ThanksCardAPI.Models.ThanksCard", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("ThanksCardid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ThanksCardid"));
 
                     b.Property<string>("Body")
                         .HasColumnType("text");
@@ -117,20 +106,21 @@ namespace ThanksCardAPI.Migrations
                     b.Property<long>("FromId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("TemplateId")
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<long>("TitleiD")
                         .HasColumnType("bigint");
 
                     b.Property<long>("ToId")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("kidoku")
-                        .HasColumnType("boolean");
-
-                    b.HasKey("Id");
+                    b.HasKey("ThanksCardid");
 
                     b.HasIndex("FromId");
 
-                    b.HasIndex("TemplateId");
+                    b.HasIndex("TemplateameTemplateid");
 
                     b.HasIndex("ToId");
 
@@ -180,9 +170,6 @@ namespace ThanksCardAPI.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<long>("Usercd")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
@@ -207,11 +194,9 @@ namespace ThanksCardAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ThanksCardAPI.Models.Template", "Templatename")
+                    b.HasOne("ThanksCardAPI.Models.Template", "Templateame")
                         .WithMany()
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TemplateameTemplateid");
 
                     b.HasOne("ThanksCardAPI.Models.User", "To")
                         .WithMany()
@@ -221,7 +206,7 @@ namespace ThanksCardAPI.Migrations
 
                     b.Navigation("From");
 
-                    b.Navigation("Templatename");
+                    b.Navigation("Templateame");
 
                     b.Navigation("To");
                 });
