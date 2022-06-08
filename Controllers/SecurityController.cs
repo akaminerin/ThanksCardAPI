@@ -6,52 +6,49 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThanksCardAPI.Models;
-
 namespace ThanksCardAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SecuritysController : ControllerBase
+    public class SecurityController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public SecuritysController(ApplicationContext context)
+        public SecurityController(ApplicationContext context)       
         {
             _context = context;
         }
 
-        // GET: api/Securitys
+        // GET: api/Security
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Security>>> GetSecuritys()
+        public async Task<ActionResult<IEnumerable<Security>>> GetSecurity()
         {
             return await _context.Security.ToListAsync();
         }
 
-        // GET: api/Securitys/5
+        // GET: api/Security/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Security>> GetSecurity(long id)
         {
-            var security = await _context.Security.FindAsync(id);
+            var Security = await _context.Security.FindAsync(id);
 
-            if (security == null)
+            if (Security == null)
             {
                 return NotFound();
             }
 
-            return security;
+            return Security;
         }
 
         // PUT: api/Securitys/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSecurity(long id, Security security)
+        public async Task<IActionResult> PutSecurity(long id, Security Security)
         {
-            if (id != security.Id)
+            if (id != Security.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(security).State = EntityState.Modified;
+            _context.Entry(Security).State = EntityState.Modified;
 
             try
             {
@@ -72,29 +69,29 @@ namespace ThanksCardAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Securitys
+
+        // POST: api/Security
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Security>> PostSecurity(Security security)
+        public async Task<ActionResult<Security>> PostSecurity(Security Security)
         {
-
-            _context.Security.Add(security);
+            _context.Security.Add(Security);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSecurity", new { id = security.Id }, security);
+            return CreatedAtAction("GetSecurity", new { id = Security.id }, Security);
         }
 
-        // DELETE: api/Securitys/5
+        // DELETE: api/Security/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSecurity(long id)
         {
-            var security = await _context.Security.FindAsync(id);
-            if (security == null)
+            var Security = await _context.Security.FindAsync(id);
+            if (Security == null)
             {
                 return NotFound();
             }
 
-            _context.Security.Remove(security);
+            _context.Security.Remove(Security);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +99,7 @@ namespace ThanksCardAPI.Controllers
 
         private bool SecurityExists(long id)
         {
-            return _context.Security.Any(e => e.Id == id);
+            return _context.Security.Any(e => e.id == id);
         }
     }
 }
