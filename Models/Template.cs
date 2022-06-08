@@ -5,7 +5,7 @@ namespace ThanksCardAPI.Models
     //テンプレートテーブル
     public class Template
     {
-        public long Id { get; set; }
+        public long TemplateId { get; set; }
         public string Templatename { get; set; }
         public string TemplateText { get; set; }
     }
