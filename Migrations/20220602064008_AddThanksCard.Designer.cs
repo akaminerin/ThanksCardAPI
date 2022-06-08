@@ -12,8 +12,8 @@ using ThanksCardAPI.Models;
 namespace ThanksCardAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220606063816_AddUserModel8")]
-    partial class AddUserModel8
+    [Migration("20220602064008_AddThanksCard")]
+    partial class AddThanksCard
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,19 +48,6 @@ namespace ThanksCardAPI.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Security", b =>
-                {
-                    b.Property<long>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
-
-                    b.HasKey("id");
-
-                    b.ToTable("Securities");
-                });
-
             modelBuilder.Entity("ThanksCardAPI.Models.Tag", b =>
                 {
                     b.Property<long>("Id")
@@ -77,25 +64,6 @@ namespace ThanksCardAPI.Migrations
                     b.ToTable("Tag");
                 });
 
-            modelBuilder.Entity("ThanksCardAPI.Models.Template", b =>
-                {
-                    b.Property<long>("TemplateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("TemplateId"));
-
-                    b.Property<string>("TemplateText")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Templatename")
-                        .HasColumnType("text");
-
-                    b.HasKey("TemplateId");
-
-                    b.ToTable("Template");
-                });
-
             modelBuilder.Entity("ThanksCardAPI.Models.ThanksCard", b =>
                 {
                     b.Property<long>("Id")
@@ -107,32 +75,21 @@ namespace ThanksCardAPI.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("text");
 
-                    b.Property<int>("Countiine")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Countkaizen")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<long>("FromId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("TemplateId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
 
                     b.Property<long>("ToId")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("kidoku")
-                        .HasColumnType("boolean");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FromId");
-
-                    b.HasIndex("TemplateId");
 
                     b.HasIndex("ToId");
 
@@ -182,9 +139,6 @@ namespace ThanksCardAPI.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<long>("Usercd")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
@@ -209,12 +163,6 @@ namespace ThanksCardAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ThanksCardAPI.Models.Template", "Templatename")
-                        .WithMany()
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ThanksCardAPI.Models.User", "To")
                         .WithMany()
                         .HasForeignKey("ToId")
@@ -222,8 +170,6 @@ namespace ThanksCardAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("From");
-
-                    b.Navigation("Templatename");
 
                     b.Navigation("To");
                 });

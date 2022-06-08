@@ -1,13 +1,11 @@
 ﻿#nullable disable
 namespace ThanksCardAPI.Models
 {
-    //所属テーブル
     public class Department
     {
         public long Id { get; set; }
         public int Code { get; set; }
         public string Name { get; set; }
-
 
         // 部と課のような階層構造を実現するために、自己参照(DepartmentエンティティがDepartmentエンティティとリレーションを持つ)を利用する
         // ParentId には親部署のIdが入る
